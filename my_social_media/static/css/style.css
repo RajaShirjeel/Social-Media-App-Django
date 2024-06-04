@@ -6,23 +6,29 @@
 
 /* header */
 
+.mobile-layout{
+    display: none;
+}
+
 .header-container{
-    background-color: #EEEEEE;
+    background-color:  #3b5998;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
+    color: white
 }
 
 .logo-flex{
     display: flex;
     align-items: center;
     gap: 10px;
-}
+} 
 
 .header-h1{
     font-family: 'Poppins', sans-serif;
     font-size: 24px;
+    padding-top: 10px;
 }
 
 .header-input{
@@ -38,18 +44,19 @@
     display: flex;
     align-items: center;
     gap: 60px;
-    margin-left: -90px;
+    margin-left: -150px;
 }
 
 .header-profile{
     display: flex;
-    gap: 50px
+    gap: 50px;
+    margin-right: 20px;
 }
 
 .header-icon-a, 
 .header-prof{
     text-decoration: none;
-    color: black;
+    color: white;
     transition: color 0.3s;
 }
 
@@ -57,3 +64,63 @@
 .header-prof:hover {
     color: gray;
 }
+
+
+/* for mobile phones */
+
+/* Adjust the styles for mobile phones */
+
+@media (max-width: 576px) {
+    
+
+    .desktop-layout{
+        display: none;
+    }
+
+    .mobile-layout{
+        display: block;
+    }
+
+    .header-container {
+        padding: 10px; /* Adjust padding for better spacing */
+        flex-direction: column; /* Stack elements vertically */
+        align-items: center; /* Align items in the center */
+    }
+
+    .logo-profile-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 10px; /* Add space between logo/profile and icons */
+    }
+
+    .logo-flex {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Reduce gap between logo and input */
+    }
+
+    .header-h1 {
+        font-size: 20px; /* Adjust font size for smaller screens */
+        padding-top: 4px; /* Remove margin */
+    }
+
+    .header-input {
+        width: 150px; /* Adjust input width */
+    }
+
+    .header-profile {
+        display: flex;
+        gap: 30px; /* Adjust gap between profile icons */
+    }
+
+    .header-icons {
+        display: flex;
+        justify-content: center;
+        margin-left: 3px;
+        margin-top: 5px;
+        gap: 40px;
+    }
+}
+
