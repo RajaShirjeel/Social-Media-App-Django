@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="form-container">
+        <div class="form-holder">
+            <div class="form-header">
+                <h1 class="form-logo">Skylink</h1>
+                <div class="form-links">
+                    <h2 class="form-redirect">Already have an account? </h2>
+                    <a href="#" class="form-re-link">Sign Up</a>
+                </div>
+    
+            </div>
+    
+            <div class="form-content">
+                <h2 class="form-heading">Sign In</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="{{form.username.id_for_label}}" class="form-label">{{form.username.label}}</label>
+                        {{form.username}}
+                        {% for error in form.username.errors %}
+                            <span class="error">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{form.password.id_for_label}}" class="form-label">{{form.password.label}}</label>
+                        {{form.password}}
+                        {% for error in form.password.errors %}
+                            <span class="error">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{form.confirm_password.id_for_label}}" class="form-label">{{form.confirm_password.label}}</label>
+                        {{form.confirm_password}}
+                        {% for error in form.confirm_password.errors %}
+                            <span class="error">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <input type="submit" class="btn btn-primary">
+                </form>
+            </div>
+    
+            <div class="form-help">
+    
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

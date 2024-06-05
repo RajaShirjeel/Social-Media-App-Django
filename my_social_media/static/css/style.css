@@ -16,7 +16,8 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
-    color: white
+    color: white;
+    margin-bottom: 30px;
 }
 
 .logo-flex{
@@ -68,8 +69,6 @@
 
 /* for mobile phones */
 
-/* Adjust the styles for mobile phones */
-
 @media (max-width: 576px) {
     
 
@@ -82,9 +81,9 @@
     }
 
     .header-container {
-        padding: 10px; /* Adjust padding for better spacing */
-        flex-direction: column; /* Stack elements vertically */
-        align-items: center; /* Align items in the center */
+        padding: 10px; 
+        flex-direction: column; 
+        align-items: center; 
     }
 
     .logo-profile-flex {
@@ -92,27 +91,27 @@
         justify-content: space-between;
         align-items: center;
         width: 100%;
-        margin-bottom: 10px; /* Add space between logo/profile and icons */
+        margin-bottom: 10px; 
     }
 
     .logo-flex {
         display: flex;
         align-items: center;
-        gap: 10px; /* Reduce gap between logo and input */
+        gap: 10px; 
     }
 
     .header-h1 {
-        font-size: 20px; /* Adjust font size for smaller screens */
-        padding-top: 4px; /* Remove margin */
+        font-size: 20px;
+        padding-top: 4px; 
     }
 
     .header-input {
-        width: 150px; /* Adjust input width */
+        width: 150px; 
     }
 
     .header-profile {
         display: flex;
-        gap: 30px; /* Adjust gap between profile icons */
+        gap: 30px;
     }
 
     .header-icons {
@@ -124,3 +123,50 @@
     }
 }
 
+/* Sign up page */
+
+.form-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.form-holder{
+    padding: 0 20px;
+    background-color: #F5F5F5;
+    width: 900px;
+}
+
+
+.form-header{
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-bottom: 50px;
+}
+
+.form-logo{
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.form-redirect{
+    font-size: 15px;
+    color: #808080;
+    display: inline-block;
+}
+
+.form-re-link{
+    text-decoration: none;
+}
+
+.form-content{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-heading{
+    align-self: center;
+}
