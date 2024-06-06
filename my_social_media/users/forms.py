@@ -3,20 +3,20 @@ from django import forms
 from .models import CustomUser
 
 class CustomUserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-inputs', 'id': 'password'}))
-    confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-inputs', 'id': 'confirm_password'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-inputs', 'id': 'password', 'placeholder': 'Your password'}))
+    confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-inputs', 'id': 'confirm_password', 'placeholder': 'Confirm password'}))
 
 
     class Meta: 
         model = CustomUser
         fields = ('username', 'email')
         widgets = {
-            'username': forms.TextInput(attrs={"class": "form-inputs"}),
-            'email': forms.TextInput(attrs={"class": "form-inputs"})
+            'username': forms.TextInput(attrs={"placeholder": 'John Doe', "class": "form-inputs"}),
+            'email': forms.TextInput(attrs={"placeholder": 'JohnDoe@gmail.com', "class": "form-inputs"})
         }
         labels = {
             'username': 'Username',
-            'email': 'Email Address',
+            'email': 'Email',
             'password': 'Password',
             'confirm_password': 'Confirm Password'
         }
@@ -32,3 +32,8 @@ class CustomUserForm(forms.ModelForm):
         
         return cleaned_data
 
+
+class LoginForm(forms.Form):
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-inputs', 'id': 'password', 'placeholder': 'Your password'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-inputs', 'id': 'email', 'placeholder': 'JohnDoe@gmail.com'}))
+    

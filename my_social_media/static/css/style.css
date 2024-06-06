@@ -17,7 +17,7 @@
     justify-content: space-between;
     padding: 10px 20px;
     color: white;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
 }
 
 .logo-flex{
@@ -129,22 +129,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
     font-family: 'Montserrat', sans-serif;
 }
 
 .form-holder{
     padding: 0 20px;
-    background-color: #F5F5F5;
+    background-color: #ffffff;
     width: 900px;
-}
-
-
-.form-header{
-    display: flex;
-    font-family: 'Poppins', sans-serif;
-    justify-content: space-between;
-    margin-left: 20px;
-    margin-bottom: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 .form-logo{
@@ -168,5 +162,49 @@
 }
 
 .form-heading{
+    padding-top: 30px;
     align-self: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #0d6efd;
+}
+
+.form-labels-inputs{
+    margin-left: 185px;
+}
+
+.form-label{
+    display: block;
+}
+
+.form-inputs{
+    border-radius: 8px;
+    border: 1px solid gray;
+    margin-bottom: 20px;
+    width: 70%;
+    height: 40px;
+    padding: 5px;
+
+}
+
+.signup-button{
+    margin-top: 20px;
+    margin-left: 270px;
+    margin-bottom: 15px;
+    width: 30%;
+    height: 50px;
+}
+
+.form-par{
+    font-size: 14px;
+    display: inline-block;
+    font-weight: 500;
+}
+
+.form-redirect-link{
+    display: inline-block;
+    text-decoration: none;
+}
+
+.redirect-to-log{
+    margin-left: 280px;
 }
