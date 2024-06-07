@@ -73,6 +73,9 @@
             <div class="logo-flex">
                 <h1 class="header-h1">Skylink</h1>
                 <input type="text" placeholder=" 🔍 Search.." class="header-input">
+                {% if user.is_authenticated %}
+                <p>Logged</p>
+                {% endif %}
             </div>
 
             <nav class="header-icons">

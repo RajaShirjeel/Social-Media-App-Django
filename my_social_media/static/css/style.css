@@ -208,3 +208,9 @@
 .redirect-to-log{
     margin-left: 280px;
 }
+
+.error-message{
+    font-size: 14px;
+    color: red;
+    margin-bottom: 5px;
+}

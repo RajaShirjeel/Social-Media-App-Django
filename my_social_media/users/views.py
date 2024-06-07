@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
@@ -9,11 +9,16 @@ def signup(request):
     if request.method == 'POST':
         form = CustomUserForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            password = form.cleaned_data['password']
+            user.set_password(password)
+            user.save()
+            return redirect('users:login')
 
     else:
         form = CustomUserForm()
-        return render(request, 'users/register.html', {'form': form})
+
+    return render(request, 'users/register.html', {'form': form})
     
 
 def user_login(request):
@@ -26,10 +31,17 @@ def user_login(request):
 
             if user is not None: 
                 login(request, user)
+                return redirect('home')
             
             else: 
-                messages.error(request, 'Invalid email or password')
+                form.add_error('email', 'Invalid email or password')
 
     else:
         form = LoginForm()
-        return render(request, 'users/login.html', {'form': form})
+
+    return render(request, 'users/login.html', {'form': form})
+
+
+def user_logout(request):
+    logout(request)
+    return redirect('home')  

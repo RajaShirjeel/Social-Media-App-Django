@@ -27,8 +27,8 @@ class CustomUserForm(forms.ModelForm):
         password = cleaned_data.get('password')
         confirm_pass = cleaned_data.get('confirm_password')
 
-        if password != confirm_pass:
-            raise forms.ValidationError("Passwords do not match")
+        if password and confirm_pass and password != confirm_pass:
+            self.add_error('confirm_password',"Passwords do not match!")
         
         return cleaned_data
 

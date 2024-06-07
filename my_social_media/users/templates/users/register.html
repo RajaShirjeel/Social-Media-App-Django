@@ -11,34 +11,34 @@
 
                         <div class="form-group">
                             <label for="{{form.email.id_for_label}}" class="form-label">{{form.email.label}}</label>
-                            {{form.email}}
                             {% for error in form.email.errors %}
-                                <span class="error">{{ error }}</span>
+                            <span class="error-message">{{ error }}</span>
                             {% endfor %}
+                            {{form.email}}
                         </div>
 
                         <div class="form-group">
                             <label for="{{form.username.id_for_label}}" class="form-label">{{form.username.label}}</label>
-                            {{form.username}}
                             {% for error in form.username.errors %}
-                                <span class="error">{{ error }}</span>
+                            <span class="error-message">{{ error }}</span>
                             {% endfor %}
+                            {{form.username}}
                         </div>
     
                         <div class="form-group">
                             <label for="{{form.password.id_for_label}}" class="form-label">{{form.password.label}}</label>
-                            {{form.password}}
                             {% for error in form.password.errors %}
-                                <span class="error">{{ error }}</span>
+                            <span class="error-message">{{ error }}</span>
                             {% endfor %}
+                            {{form.password}}
                         </div>
     
                         <div class="form-group">
                             <label for="{{form.confirm_password.id_for_label}}" class="form-label">{{form.confirm_password.label}}</label>
-                            {{form.confirm_password}}
                             {% for error in form.confirm_password.errors %}
-                                <span class="error">{{ error }}</span>
+                            <span class="error-message">{{ error }}</span>
                             {% endfor %}
+                            {{form.confirm_password}}
                         </div>
                     </div>
                     <input type="submit" class="btn btn-primary signup-button" value="Sign Up">
@@ -46,7 +46,7 @@
                 <div class="redirect-to-log">
 
                     <p class="form-par">Already have an account? </p>
-                    <a href="#" class="form-redirect-link">Sign In</a>
+                    <a href="{% url 'users:login' %}" class="form-redirect-link">Sign In</a>
                 </div>
             </div>
         </div>

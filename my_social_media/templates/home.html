@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %} 
+    <a href="{% url 'users:logout' %}">
+        <button class="btn btn-primary">Log out</button>
+    </a>
+{% endblock %}
