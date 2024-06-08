@@ -1,10 +1,27 @@
+from django.db.models.base import Model as Model
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.views.generic import DetailView
+from django.shortcuts import get_object_or_404
 
 from .forms import CustomUserForm, LoginForm
-
+from .models import CustomUser
 # Create your views here.
+
+class UserProfile(DetailView):
+    model = CustomUser
+    template_name = 'users/profile.html'
+    slug_field = 'slug'
+    context_object_name = 'user'
+
+    def get_object(self, queryset=None):
+        slug = self.kwargs.get('slug')
+        return get_object_or_404(CustomUser, slug=slug)
+
+
+
+
 def signup(request):
     if request.method == 'POST':
         form = CustomUserForm(request.POST)
@@ -45,3 +62,5 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('home')  
+
+
