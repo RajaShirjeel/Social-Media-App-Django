@@ -4,6 +4,13 @@
     box-sizing: border-box;
 }
 
+
+/* reuseable */
+.normal-links{
+    color: white;
+    text-decoration: none;
+}
+
 /* header */
 
 .mobile-layout{
@@ -123,7 +130,7 @@
     }
 }
 
-/* Sign up page */
+/* Sign up / login page */
 
 .form-container{
     display: flex;
@@ -206,11 +213,38 @@
 }
 
 .redirect-to-log{
-    margin-left: 280px;
+    margin-left: 285px;
 }
 
 .error-message{
     font-size: 14px;
     color: red;
+}
+
+.form-eye-container{
+    display: flex;
+    align-items: center;
+}
+
+.bi-eye-slash{
+    margin-left: 7px;
     margin-bottom: 5px;
+}
+
+.bi-eye-slash:hover{
+    color: #868e96;
+}
+
+@media (max-width: 576px){
+    .form-labels-inputs{
+        margin-left: 100px;
+    }
+
+    .signup-button{
+        margin-left: 130px;
+    }
+
+    .redirect-to-log{
+        margin-left: 70px;
+    }
 }
