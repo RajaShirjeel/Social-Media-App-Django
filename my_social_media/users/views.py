@@ -1,12 +1,14 @@
+from typing import Any
 from django.db.models.base import Model as Model
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.views.generic import DetailView
 from django.shortcuts import get_object_or_404
+from django.db.utils import IntegrityError
 
 from .forms import CustomUserForm, LoginForm
-from .models import CustomUser
+from .models import CustomUser, Follow
 # Create your views here.
 
 class UserProfile(DetailView):
@@ -18,6 +20,14 @@ class UserProfile(DetailView):
     def get_object(self, queryset=None):
         slug = self.kwargs.get('slug')
         return get_object_or_404(CustomUser, slug=slug)
+    
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        profile_user = self.get_object()
+        is_following = Follow.objects.filter(follower=self.request.user, following=profile_user).exists()
+        context['is_following'] = is_following
+        return context
+
 
 
 
@@ -64,3 +74,20 @@ def user_logout(request):
     return redirect('home')  
 
 
+def follow(request, pk):
+    user = get_object_or_404(CustomUser, pk=pk)
+    existing_follow = Follow.objects.filter(follower=request.user, following=user).exists()
+    if not existing_follow:
+        try: 
+            follow = Follow.objects.create(follower=request.user, following=user)
+        
+        except IntegrityError:
+            pass
+
+    return redirect('users:user_profile', slug=user.slug)
+
+
+def unfollow(request, pk):
+    user = get_object_or_404(CustomUser, pk=pk)
+    Follow.objects.filter(follower=request.user, following=user).delete()
+    return redirect('users:user_profile', slug=user.slug)

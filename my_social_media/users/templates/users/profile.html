@@ -10,8 +10,16 @@
 
             <p class="profile-username">{{user.username}}</p>
         </div>
+        {% if user != request.user and not is_following %}
+            <a href="{% url 'users:follow_user' pk=user.pk %}" class="normal-links">
+                    <button class="btn btn-primary follow-btn">Follow</button>
+            </a>
+        {% elif is_following %}
+            <a href="{% url 'users:unfollow_user' pk=user.pk %}">
+                <button class="btn btn-primary follow-btn">Unfollow</button>   
+            </a>
 
-        <button class="btn btn-primary follow-btn">Follow</button>
+        {% endif %}
         <div class="follower-count-container">
             <p class="follower-count">{{user.followers.count}} followers</p>
             <p class="following-count">{{user.following.count}} following</p>
@@ -20,3 +28,5 @@
 </div>
 
 {% endblock %}
+
+                       
