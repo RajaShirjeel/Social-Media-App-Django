@@ -21,6 +21,7 @@
 
         {% endif %}
         <div class="follower-count-container">
+            <p class="post-count">{{user.posts.count}} posts</p>
             <p class="follower-count">{{user.followers.count}} followers</p>
             <p class="following-count">{{user.following.count}} following</p>
         </div>

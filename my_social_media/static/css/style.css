@@ -279,9 +279,78 @@
 .follower-count-container{
     display: flex;
     justify-content: center;
+    margin-left: 20px;
 }
 
 .follower-count,
-.following-count{
+.following-count,
+.post-count{
     margin: 20px 20px;
+}
+
+
+/* Post Form */
+
+.post-form-container{
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.post-form-holder{
+    font-family: 'Poppins', sans-serif;
+    margin-top: 40px;
+    box-shadow:0 0 10px rgba(0, 0, 0, 0.1);
+    width: 1000px;
+    border-radius: 20px;
+    text-align: center;
+    padding: 20px
+}
+
+.post-form-content{
+    display: flex;
+    flex-direction: column;
+}
+
+.post-form-heading{
+    margin-bottom: 30px;
+    border-bottom: 2px solid #0d6efd;
+    align-self: center;
+    display: inline-block;
+}
+
+.post-form-label{
+    display: block;
+    margin-bottom: 10px;
+    text-align: start;
+    margin-left: 147px;
+    font-weight: bold;
+}
+
+.post-form-inputs{
+    width: 70%;
+    height: 40px;
+    margin-bottom: 40px;
+    border: 1px solid gray;
+    padding: 5px;
+    border-radius: 14px;
+}
+
+.button-center{
+    display: flex;
+    justify-content: center;
+}
+
+.post-button{
+    display: block;
+    border-radius: 14px;
+    padding: 10px 20px;
+}
+
+.post-img-div{
+    display: flex;
+    align-items: flex-start;
+    margin-left: 147px;
 }

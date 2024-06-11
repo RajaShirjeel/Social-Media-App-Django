@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="post-form-container">
+    <div class="post-form-holder">
+        <div class="post-form-content">
+            <h1 class="post-form-heading">New Post</h1>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <label for="{{form.text.id_for_label}}" class="post-form-label">{{form.text.label}}</label>
+                {{form.text}}
+
+                <label for="{{form.image.id_for_label}}" class="post-form-label">{{form.image.label}} (Optional)</label>   
+                
+                <div class="post-img-div">
+                    {{form.image}}
+                      
+                </div>
+                
+
+                <div class="button-center">
+                    <input type="submit" class="btn btn-primary post-button" name="submit" value="POST">
+                </div>
+            </form>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

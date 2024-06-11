@@ -1,5 +1,5 @@
-from typing import Any
 from django import forms
+
 from .models import CustomUser
 
 class CustomUserForm(forms.ModelForm):

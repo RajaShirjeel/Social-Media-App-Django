@@ -10,7 +10,7 @@ class CustomUser(AbstractUser):
     username = models.CharField(max_length=150)
     email = models.EmailField(unique=True)
     bio = models.TextField()
-    profile_picture = models.ImageField(upload_to='profile_pics', blank=True)
+    profile_picture = models.ImageField(upload_to='images/profile_pics', blank=True)
     slug = models.SlugField(unique=True, blank=True)
 
     USERNAME_FIELD = 'email'
