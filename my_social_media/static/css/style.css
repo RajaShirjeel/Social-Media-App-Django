@@ -342,9 +342,20 @@
     cursor: pointer;
 }
 
-.bi-images,
+.bi-images:hover{
+    color: grey;
+}
+
 .bi-card-text:hover{
     color: grey;
+}
+
+.post-card{
+    display: none;
+}
+
+.post-image{
+    display: block;
 }
 
 

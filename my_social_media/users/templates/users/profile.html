@@ -32,12 +32,12 @@
     <h2 class="user-post-heading">Posts</h2>
     <div class="post-icon-wrapper">
         <div class="user-post-icons">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-images post-filter" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-images post-filter" viewBox="0 0 16 16" data-type="image">
                 <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
                 <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2M14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1M2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1z"/>
               </svg>
     
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-card-text post-filter" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-card-text post-filter" viewBox="0 0 16 16" data-type="text">
                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"/>
                 <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8m0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5"/>
             </svg>
@@ -46,15 +46,21 @@
 
     <div class="user-posts">
         {% for post in user.posts.all %}
+        <div class="card mb-3 post-card {% if post.image %}post-image{% else %}post-text {% endif %}">
             {% if post.image %}
-            <div class="card mb-3 post-card {% if post.image %}post-image{% else %}post-text {% endif %}">
                 <img src="{{post.image.url}}" class="card-img-top" alt="{{post.text}}">
                 <div class="card-body">
                 <p class="user-post-text">{{post.text}}</p>
                 <p class="card-text post-date">Uploaded on {{post.created_at}}</p>
                 </div>
+
+            {% else %}
+            <div class="card-body">
+                <p class="user-post-text">{{ post.text }}</p>
+                <p class="card-text"><small class="text-body-secondary">Uploaded on {{ post.created_at }}</small></p>
             </div>
             {% endif %}
+        </div>
         {% endfor %}
     </div>
 

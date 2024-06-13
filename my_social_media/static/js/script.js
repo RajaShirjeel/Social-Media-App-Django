@@ -29,3 +29,27 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 });
+
+
+// profile 
+
+document.addEventListener("DOMContentLoaded", function() {
+    const postFilterIcons = document.querySelectorAll('.post-filter');
+    const posts = document.querySelectorAll('.post-card');
+
+    postFilterIcons.forEach(icon => {
+        icon.addEventListener('click', function() {
+            const filterType = this.getAttribute('data-type');
+
+            posts.forEach(post => {
+                if (filterType === 'image' && post.classList.contains('post-image')) {
+                    post.style.display = 'block';
+                } else if (filterType === 'text' && post.classList.contains('post-text')) {
+                    post.style.display = 'block';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        });
+    });
+});
