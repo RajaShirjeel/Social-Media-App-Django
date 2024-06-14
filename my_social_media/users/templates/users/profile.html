@@ -48,17 +48,21 @@
         {% for post in user.posts.all %}
         <div class="card mb-3 post-card {% if post.image %}post-image{% else %}post-text {% endif %}">
             {% if post.image %}
-                <img src="{{post.image.url}}" class="card-img-top" alt="{{post.text}}">
-                <div class="card-body">
-                <p class="user-post-text">{{post.text}}</p>
-                <p class="card-text post-date">Uploaded on {{post.created_at}}</p>
-                </div>
+                <a href="{% url 'post:post_detail' slug=post.slug %}" class="black-links">
+                    <img src="{{post.image.url}}" class="card-img-top" alt="{{post.text}}">
+                    <div class="card-body">
+                    <p class="user-post-text">{{post.text}}</p>
+                    <p class="card-text post-date">Uploaded on {{post.created_at}}</p>
+                    </div>
+                </a>
 
             {% else %}
-            <div class="card-body">
-                <p class="user-post-text">{{ post.text }}</p>
-                <p class="card-text"><small class="text-body-secondary">Uploaded on {{ post.created_at }}</small></p>
-            </div>
+            <a href="{% url 'post:post_detail' slug=post.slug %}" class="black-links">
+                <div class="card-body">
+                    <p class="user-post-text">{{ post.text }}</p>
+                    <p class="card-text"><small class="text-body-secondary">Uploaded on {{ post.created_at }}</small></p>
+                </div>
+            </a>
             {% endif %}
         </div>
         {% endfor %}

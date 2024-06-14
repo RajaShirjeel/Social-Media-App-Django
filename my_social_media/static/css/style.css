@@ -10,6 +10,11 @@
     text-decoration: none;
 }
 
+.black-links{
+    text-decoration: none;
+    color: black;
+}
+
 /* header */
 
 .mobile-layout{
