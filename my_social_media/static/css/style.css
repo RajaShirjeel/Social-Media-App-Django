@@ -453,3 +453,44 @@
     align-items: flex-start;
     margin-left: 147px;
 }
+
+
+/* Post page */
+
+.indi-post-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.indi-post-wrapper{
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 14px;
+}
+
+.indi-post-image{
+    width: 570px;
+    height: 500px;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+}
+
+.indi-post-text{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;;
+}
+
+.indi-post-like{
+    align-self: center;
+    margin-bottom: 20px;
+}
+
+.indi-post-comment-head{
+    font-size: 18px;
+    color: gray;
+}
