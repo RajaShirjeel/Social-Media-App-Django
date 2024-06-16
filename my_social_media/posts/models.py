@@ -44,3 +44,18 @@ class Post(models.Model):
         else:
             super().save(*args, **kwargs)
 
+    @property
+    def likes_count(self):
+        return self.likes.count()
+
+
+class Like(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likes')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='liked_posts')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('post', 'user')
+
+    def __str__(self):
+        return f'Like of {self.user.username} on {self.post.text} at {self.created_at}'
