@@ -480,17 +480,24 @@
 
 .indi-post-text{
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     font-size: 24px;
     font-weight: bold;;
 }
 
 .indi-post-like{
     align-self: center;
-    margin-bottom: 20px;
+    cursor: pointer;
 }
 
 .indi-post-comment-head{
+    margin-top: 30px;
     font-size: 18px;
     color: gray;
+}
+
+.like-btn{
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }

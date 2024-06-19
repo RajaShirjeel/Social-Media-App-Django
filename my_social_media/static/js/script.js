@@ -53,3 +53,44 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
+
+// Like and unlike
+
+document.addEventListener('DOMContentLoaded', function(){
+    const likeBtn = document.querySelector('.indi-post-like');
+    const likesCountElement = document.querySelector('.post-like-count')
+    likeBtn.addEventListener('click', function(){
+        const slug = '{{post.slug}}'
+        
+        fetch('like_post/${slug}/',{
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            likeBtn.style.color = data.liked ? 'red': '';
+            likesCountElement = data.likes_count;
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    })
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+})
