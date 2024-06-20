@@ -54,8 +54,5 @@ class Like(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='liked_posts')
     created_at = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        unique_together = ('post', 'user')
-
     def __str__(self):
         return f'Like of {self.user.username} on {self.post.text} at {self.created_at}'

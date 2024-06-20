@@ -59,11 +59,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
 document.addEventListener('DOMContentLoaded', function(){
     const likeBtn = document.querySelector('.indi-post-like');
-    const likesCountElement = document.querySelector('.post-like-count')
-    likeBtn.addEventListener('click', function(){
-        const slug = '{{post.slug}}'
-        
-        fetch('like_post/${slug}/',{
+    var likesCountElement = document.querySelector('.post-like-count')
+    const postSlug = document.querySelector('.indi-post-container').getAttribute('data-post-slug');
+    console.log("post ", postSlug) ;     
+
+    likeBtn.addEventListener('click', function(){ 
+        fetch('like_post/'+postSlug,{
             method: 'POST',
             headers: {
                 'X-CSRFToken': getCookie('csrftoken'),
@@ -71,8 +72,7 @@ document.addEventListener('DOMContentLoaded', function(){
         })
         .then(response => response.json())
         .then(data => {
-            likeBtn.style.color = data.liked ? 'red': '';
-            likesCountElement = data.likes_count;
+            likesCountElement.textContent = ''+data.likes_count
         })
         .catch(error => {
             console.log(error);
