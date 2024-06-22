@@ -37,17 +37,13 @@ def create_post(request):
 
 def like_post(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    # if request.method == 'POST':
     like_obj, created = Like.objects.get_or_create(user=request.user, post=post)
     if not created:
         like_obj.delete()
-        print('unliked')
         return JsonResponse({'likes_count': post.likes_count, 'liked': False})
 
     else:      
-        print('liked')
         return JsonResponse({'likes_count': post.likes_count, 'liked':True})
-    # return JsonResponse({'error': 'Invalid request'})
 
 
 

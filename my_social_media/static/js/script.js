@@ -60,8 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener('DOMContentLoaded', function(){
     const likeBtn = document.querySelector('.indi-post-like');
     var likesCountElement = document.querySelector('.post-like-count')
-    const postSlug = document.querySelector('.indi-post-container').getAttribute('data-post-slug');
-    console.log("post ", postSlug) ;     
+    const postSlug = document.querySelector('.indi-post-container').getAttribute('data-post-slug');    
 
     likeBtn.addEventListener('click', function(){ 
         fetch('like_post/'+postSlug,{
