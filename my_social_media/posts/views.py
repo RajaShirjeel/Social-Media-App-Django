@@ -1,3 +1,4 @@
+from typing import Any
 from django.db.models.base import Model as Model
 from django.shortcuts import render, redirect
 from django.views import generic
@@ -8,6 +9,7 @@ from django.http import JsonResponse
 
 from .forms import CreatePostForm
 from .models import Post, Like
+from comments.forms import CommentForm
 # Create your views here.
 
 class PostDetail(generic.DetailView):
@@ -19,6 +21,14 @@ class PostDetail(generic.DetailView):
     def get_object(self, queryset=None):
         slug = self.kwargs.get('slug')
         return get_object_or_404(Post, slug=slug)
+    
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        post = self.get_object()
+        context['form'] =  CommentForm()
+        context['comments'] = post.comments.all()
+        return context
+
 
 def create_post(request):
     if request.method == 'POST':

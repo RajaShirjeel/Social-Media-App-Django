@@ -1,0 +1,13 @@
+<div class="comment-form-container">
+    <div class="comment-form-content">
+        <h3 class="comment-form-header">Leave a comment</h3>
+        <form method="post" action="{% url 'comment:create_comment' slug=post.slug%}">
+            {% csrf_token %}
+            {{form.text}}
+            <div class="comment-form-button">
+                <button type="submit" class="btn btn-primary">Post comment</button>
+            </div>
+        </form>
+    </div>
+    
+</div>

@@ -11,6 +11,21 @@
                 <span class="post-like-count">{{post.likes_count}}</span>
             </div>
             <p class="indi-post-comment-head">Comments</p>
+            {% include 'comments/comment_form.html' %}
+            <div class="display-comment-container">
+                <div class="display-comments">
+                    {% for comment in comments %}
+                        <div class="comment-content">
+                            <p>{{comment.text}} - {{comment.user}}</p>
+                            {% if comment.user == request.user %}
+                                <a href="{% url 'comment:delete_comment' pk=comment.pk slug=comment.post.slug %}" class="normal-links">
+                                    <span class="cross-button">❌</span>
+                                </a>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

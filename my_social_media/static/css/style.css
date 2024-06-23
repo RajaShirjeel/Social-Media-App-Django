@@ -15,6 +15,10 @@
     color: black;
 }
 
+.cross-button{
+    cursor: pointer;
+}
+
 /* header */
 
 .mobile-layout{
@@ -501,3 +505,34 @@
     gap: 10px;
     align-items: center;
 }
+
+/* Comment Form */
+
+.comment-form-container{
+    margin-top: 20px;
+}
+
+.comment-form-header{
+    font-size: 12px;
+}
+
+.comment-form-input{
+    border-radius: 20px;
+    padding: 7px;
+    border: 1px solid gray;
+    width: 100%;
+}
+
+.comment-form-button{
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+/* Comment Display */
+
+.comment-content{
+    display: flex;
+    gap: 10px;
+}
+
