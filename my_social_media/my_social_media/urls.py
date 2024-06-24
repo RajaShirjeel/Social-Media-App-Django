@@ -20,10 +20,11 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 from . import views
+from posts import views as v
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
+    path('', v.allPosts.as_view(), name='home'),
     path('user/', include('users.urls', namespace='user')),
     path('post/', include('posts.urls', namespace='post')),
     path('comment/', include('comments.urls', namespace='comment'))

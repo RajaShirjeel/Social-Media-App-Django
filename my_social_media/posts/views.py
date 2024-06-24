@@ -30,6 +30,12 @@ class PostDetail(generic.DetailView):
         return context
 
 
+class allPosts(generic.ListView):
+    model = Post
+    template_name = 'home.html'
+    context_object_name = 'posts'
+
+
 def create_post(request):
     if request.method == 'POST':
         form = CreatePostForm(request.POST, request.FILES)

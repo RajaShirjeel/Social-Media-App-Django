@@ -1,6 +1,24 @@
 {% extends 'base.html' %}
 {% block content %} 
-    <a href="{% url 'users:logout' %}">
-        <button class="btn btn-primary">Log out</button>
-    </a>
+
+    <div class="display-posts-container">
+        {% for post in posts %}
+            {% if post.image %}
+                <div class="display-post-box">
+                    <a href="{% url 'post:post_detail' slug=post.slug %}" class="black-links">
+                        <img src="{{ post.image.url }}" alt="post image" class="display-post-image">
+                        <p class="display-post-text">{{ post.text }}</p>
+                    </a>
+                    <p class="display-post-credits">
+                        Posted On: {{ post.created_at }} by 
+                        <span>
+                            <a href="{% url 'user:user_profile' slug=post.user.slug %}" class="without-dec">
+                                {{ post.user }}
+                            </a>
+                        </span>
+                    </p>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endblock %}
