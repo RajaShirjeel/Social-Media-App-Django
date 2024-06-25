@@ -396,6 +396,22 @@
     }
 }
 
+.camera-icon{
+    margin-top: 80px;
+    cursor: pointer;
+}
+
+.camera-profile-wrapper{
+    margin-left: 20px;
+}
+
+.user-profile-picture{
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+}
+
 /* Post Form */
 
 .post-form-container{

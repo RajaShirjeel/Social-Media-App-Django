@@ -91,3 +91,14 @@ def unfollow(request, pk):
     user = get_object_or_404(CustomUser, pk=pk)
     Follow.objects.filter(follower=request.user, following=user).delete()
     return redirect('users:user_profile', slug=user.slug)
+
+
+def edit_profile(request, slug):
+    user = get_object_or_404(CustomUser, slug=slug)
+    if request.method == 'POST':
+        profile_picture = request.FILES.get('profile-picture')
+        if profile_picture: 
+            user.profile_picture = profile_picture
+        user.save()
+
+    return redirect('user:user_profile', slug=slug)
