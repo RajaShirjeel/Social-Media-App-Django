@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="profile-edit-container">
+        <div class="profile-edit-wrapper">
+            <form method="post" action="{% url 'user:edit_profile_pic' slug=user.slug %}" enctype="multipart/form-data" >
+                <div class="edit-form-content">
+                    {% csrf_token %}
+                    {% if user.profile_picture %}
+                    <img src="{{user.profile_picture.url}}" alt="profile-picture" class="user-profile-picture edit-profile-picture">
+                    {% else %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-person-circle profile-pic" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg>
+                    {% endif %}
+                    <label for="profile_picture">
+                        <input type="file" name="profile_picture" id="profile_picture" class="profile-picture-input">
+                    </label>
+                    <label for="name" class="edit-name-label">Change Name</label>
+                    <input type="text" name="name" id="name" value="{{user.username}}" class="edit-name-input">
+                    <button type="submit" class="btn btn-primary">Submit Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

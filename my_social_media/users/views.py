@@ -96,9 +96,16 @@ def unfollow(request, pk):
 def edit_profile(request, slug):
     user = get_object_or_404(CustomUser, slug=slug)
     if request.method == 'POST':
-        profile_picture = request.FILES.get('profile-picture')
+        profile_picture = request.FILES.get('profile_picture')
+        name = request.POST.get('name')
+        user.username = name
         if profile_picture: 
             user.profile_picture = profile_picture
         user.save()
 
     return redirect('user:user_profile', slug=slug)
+
+
+def edit_page(request, slug):
+    user = get_object_or_404(CustomUser, slug=slug)
+    return render(request, 'users/edit_profile.html', {'user':user})

@@ -29,6 +29,12 @@
     display: none;
 }
 
+.header-profile-pic{
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+
 .header-container{
     background-color:  #3b5998;
     display: flex;
@@ -396,7 +402,7 @@
     }
 }
 
-.camera-icon{
+.edit-icon{
     margin-top: 80px;
     cursor: pointer;
 }
@@ -591,4 +597,48 @@
 .display-post-credits{
     font-size: 14px;
     padding: 10px;
+}
+
+/* edit profile page */
+
+.profile-edit-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;}
+
+.profile-edit-wrapper{
+    display: flex;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    justify-content: center;
+    width: 600px;
+
+
+}
+
+.edit-profile-picture{
+   margin-left: 120px;
+}
+
+.edit-form-content{
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-picture-input{
+    margin-top: 30px;
+    margin-left: 50px;
+}
+
+.edit-name-label{
+    margin-top: 30px;
+}
+
+.edit-name-input{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 1px solid gray;
+    border-radius: 14px;
+    padding: 5px;
+
 }
