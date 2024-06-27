@@ -13,18 +13,32 @@
             <p class="indi-post-comment-head">Comments</p>
             {% include 'comments/comment_form.html' %}
             <div class="display-comment-container">
-                <div class="display-comments">
                     {% for comment in comments %}
-                        <div class="comment-content">
-                            <p>{{comment.text}} - {{comment.user}}</p>
-                            {% if comment.user == request.user %}
-                                <a href="{% url 'comment:delete_comment' pk=comment.pk slug=comment.post.slug %}" class="normal-links">
-                                    <span class="cross-button">❌</span>
+                        <div class="display-comments">
+                            {% if comment.user.profile_picture %}
+                                <a href="{% url 'users:user_profile' slug=comment.user.slug %}" class="comment-svg black-links">
+                                    <img src="{{comment.user.profile_picture.url}}" alt="profile-picture" class="comment-profile-pic">
                                 </a>
+                            {% else %}
+                                <a href="{% url 'users:user_profile' slug=comment.user.slug %}" class="comment-svg black-links">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-person-circle comment-profile-svg" viewBox="0 0 16 16">
+                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                                    </svg>
+                                </a> 
                             {% endif %}
+                            <div class="comment-card">
+                                <div class="comment-content">
+                                    <p>{{comment.text}}</p>
+                                    {% if comment.user == request.user %}
+                                        <a href="{% url 'comment:delete_comment' pk=comment.pk slug=comment.post.slug %}" class="normal-links">
+                                            <span class="cross-button">❌</span>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
                         </div>
                     {% endfor %}
-                </div>
             </div>
         </div>
     </div>
