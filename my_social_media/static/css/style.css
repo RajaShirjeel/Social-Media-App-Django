@@ -672,3 +672,39 @@
     padding: 5px;
 
 }
+
+
+/* Search Page */
+
+.search-users-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-left: 30px;
+    gap: 10px;
+}
+
+.search-users-card{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+.search-users-heading{
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-bottom: 40px;
+
+}
+
+.search-users-image{
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+.search-users-name{
+    margin-bottom: 0;
+}

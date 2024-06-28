@@ -19,7 +19,9 @@
                     <a href="/" class="normal-links">
                         <h1 class="header-h1">Skylink</h1>
                     </a>
-                    <input type="text" placeholder=" 🔍 Search.." class="header-input">
+                    <form action="{% url 'search_users' %}" method="get">
+                        <input type="text" placeholder=" 🔍 Search for users.." class="header-input" name="query">
+                    </form>
                 </div>
                 
                 <div class="header-profile">
@@ -76,7 +78,9 @@
                 <a href="/" class="normal-links">
                     <h1 class="header-h1">Skylink</h1>
                 </a>
-                <input type="text" placeholder=" 🔍 Search.." class="header-input">
+                <form action="{% url 'search_users' %}" method="get">
+                    <input type="text" placeholder=" 🔍 Search.." class="header-input" name="query">
+                </form>
             </div>
 
             <nav class="header-icons">

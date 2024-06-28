@@ -25,6 +25,7 @@ from posts import views as v
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', v.allPosts.as_view(), name='home'),
+    path('search_users/', views.search_users, name='search_users'),
     path('user/', include('users.urls', namespace='user')),
     path('post/', include('posts.urls', namespace='post')),
     path('comment/', include('comments.urls', namespace='comment'))
