@@ -2,6 +2,18 @@
 {% block content %}
     <div class="indi-post-container" data-post-slug="{{ post.slug }}">
         <div class="indi-post-wrapper">
+            {% if post.user.profile_picture %}
+                <a href="{% url 'users:user_profile' slug=post.user.slug %}" class="without-dec">
+                    <img src="{{post.user.profile_picture.url}}" alt="profile_picture"  class="indi-post-profile">
+                </a>
+            {% else %}
+                <a href="{% url 'users:user_profile' slug=post.user.slug %}" class="black-links">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle default-icon" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg>
+                </a> 
+            {% endif %}
             <img src="{{post.image.url}}" alt="{{post.text}}" class="indi-post-image">
             <p class="indi-post-text">{{post.text}}</p>
             <div class="like-btn">
@@ -11,7 +23,11 @@
                 <span class="post-like-count">{{post.likes_count}}</span>
             </div>
             <p class="indi-post-comment-head">Comments</p>
-            {% include 'comments/comment_form.html' %}
+            {% if user.is_authenticated %}
+                {% include 'comments/comment_form.html' %}
+            {% else %}
+                <p class="comment-not-logged">You must be logged in to add a Comment</p>
+            {% endif %}
             <div class="display-comment-container">
                     {% for comment in comments %}
                         <div class="display-comments">

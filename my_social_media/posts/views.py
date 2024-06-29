@@ -4,7 +4,9 @@ from django.shortcuts import render, redirect
 from django.views import generic
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
-
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse
 
 
 from .forms import CreatePostForm
@@ -12,11 +14,12 @@ from .models import Post, Like
 from comments.forms import CommentForm
 # Create your views here.
 
-class PostDetail(generic.DetailView):
+class PostDetail(generic.DetailView, LoginRequiredMixin):
     template_name = 'posts/post_detail.html'
     model = Post
     slug_field = 'slug'
     context_object_name = 'post'
+    login_url = 'users:login'
 
     def get_object(self, queryset=None):
         slug = self.kwargs.get('slug')
@@ -35,7 +38,7 @@ class allPosts(generic.ListView):
     template_name = 'home.html'
     context_object_name = 'posts'
 
-
+@login_required
 def create_post(request):
     if request.method == 'POST':
         form = CreatePostForm(request.POST, request.FILES)
@@ -53,6 +56,11 @@ def create_post(request):
 
 def like_post(request, slug):
     post = get_object_or_404(Post, slug=slug)
+    if not request.user.is_authenticated:
+        print('here')
+        login_url = reverse('users:login')
+        return JsonResponse({'redirect': True, 'redirect_url': f"{login_url}?next={request.path}", 'likes_count': post.likes_count})
+    
     like_obj, created = Like.objects.get_or_create(user=request.user, post=post)
     if not created:
         like_obj.delete()

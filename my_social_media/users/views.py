@@ -6,16 +6,21 @@ from django.contrib import messages
 from django.views.generic import DetailView
 from django.shortcuts import get_object_or_404
 from django.db.utils import IntegrityError
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+
+
 
 from .forms import CustomUserForm, LoginForm
 from .models import CustomUser, Follow
 # Create your views here.
 
-class UserProfile(DetailView):
+class UserProfile(LoginRequiredMixin, DetailView):
     model = CustomUser
     template_name = 'users/profile.html'
     slug_field = 'slug'
     context_object_name = 'user'
+    login_url = 'users:login'
 
     def get_object(self, queryset=None):
         slug = self.kwargs.get('slug')
@@ -27,9 +32,6 @@ class UserProfile(DetailView):
         is_following = Follow.objects.filter(follower=self.request.user, following=profile_user).exists()
         context['is_following'] = is_following
         return context
-
-
-
 
 
 def signup(request):
@@ -74,6 +76,7 @@ def user_logout(request):
     return redirect('home')  
 
 
+@login_required
 def follow(request, pk):
     user = get_object_or_404(CustomUser, pk=pk)
     existing_follow = Follow.objects.filter(follower=request.user, following=user).exists()
@@ -87,6 +90,7 @@ def follow(request, pk):
     return redirect('users:user_profile', slug=user.slug)
 
 
+@login_required
 def unfollow(request, pk):
     user = get_object_or_404(CustomUser, pk=pk)
     Follow.objects.filter(follower=request.user, following=user).delete()

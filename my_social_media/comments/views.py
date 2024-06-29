@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+
 
 from .models import Comment
 from .forms import CommentForm
 from posts.models import Post
 # Create your views here.
 
+@login_required
 def create_comment(request, slug):
     user = request.user
     post = get_object_or_404(Post, slug=slug)

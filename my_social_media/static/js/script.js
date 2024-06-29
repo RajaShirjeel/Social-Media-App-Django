@@ -71,6 +71,9 @@ document.addEventListener('DOMContentLoaded', function(){
         })
         .then(response => response.json())
         .then(data => {
+            if (data.redirect){
+                window.location.href = data.redirect_url;
+            }
             likesCountElement.textContent = ''+data.likes_count
         })
         .catch(error => {
