@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'posts',
     'comments',
     'interaction',
+    'channels'
 ]
 
 
@@ -79,6 +80,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'my_social_media.wsgi.application'
+ASGI_APPLICATION = 'my_social_media.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 
 # Database
