@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>{{other_user.username}}</h1>
+    <div class="chat-container">
+        {% for message in messages %}
+            <div class="message">{{message.sender.username}}: {{message.text}}</div>
+        {% endfor %}
+    </div>
+{% endblock %}
