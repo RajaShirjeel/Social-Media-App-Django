@@ -19,46 +19,46 @@
     </form>
 
     <script>
-        
-        // Sending Messages
-
         document.addEventListener('DOMContentLoaded', function() {
-            // Obtain necessary elements and room information
-            const chatForm = document.getElementById('chat-form');
-            const messageInput = document.getElementById('chat-message-input');
-            const roomName = '{{ other_user.username }}';
+        const chatForm = document.getElementById('chat-form');
+        const messageInput = document.getElementById('chat-message-input');
+        const roomName = '{{ other_user.slug }}';
 
-            
-            // Establish WebSocket connection
-            const chatSocket = new WebSocket(
-                'ws://' + window.location.host + '/ws/chat/' + roomName + '/');
+        const wsUrl = 'ws://' + window.location.host + '/ws/chat/' + roomName + '/';
+        console.log('WebSocket URL:', wsUrl); // Log WebSocket URL
 
+        const chatSocket = new WebSocket(wsUrl);
 
-            // Receive incoming messages
-            chatSocket.onmessage = function(e) {
-                const data = JSON.parse(e.data);
-                const message = data['message'];
-                const senderChannelName = data['sender_channel_name'];
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            const message = data['message'];
+            const senderChannelName = data['sender_channel_name'];
 
-                // Display received message in the chat interface
-                const chatContainer = document.querySelector('.chat-container');
-                const messageElement = document.createElement('div');
-                messageElement.innerText = message;
-                chatContainer.appendChild(messageElement);
-            };
+            const chatContainer = document.querySelector('.chat-container');
+            const messageElement = document.createElement('div');
+            messageElement.innerText = message;
+            chatContainer.appendChild(messageElement);
+        };
 
-            // Send messages on form submission
-            chatForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const message = messageInput.value;
-                // Send the message to the WebSocket server
-                chatSocket.send(JSON.stringify({
-                    'message': message,
-                    'receiver_channel_name': '{{ other_user.channel_name }}'
-                }));
-                messageInput.value = '';
-            });
+        chatForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const message = messageInput.value;
+            chatSocket.send(JSON.stringify({
+                'message': message,
+                'receiver_channel_name': '{{ other_user.channel_name }}'
+            }));
+            messageInput.value = '';
         });
+
+        chatSocket.onclose = function(e) {
+            console.error('WebSocket closed unexpectedly:', e);
+        };
+
+        chatSocket.onerror = function(e) {
+            console.error('WebSocket error observed:', e);
+        };
+    });
+
         
     </script>
 {% endblock %}

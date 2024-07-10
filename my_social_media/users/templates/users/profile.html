@@ -22,18 +22,24 @@
             <p class="profile-username">{{user.username}}</p>
         </div>
         {% if user != request.user and not is_following %}
-            <a href="{% url 'users:follow_user' pk=user.pk %}" class="normal-links">
+            <div class="follow-chat-container">
+                <a href="{% url 'users:follow_user' pk=user.pk %}" class="normal-links">
                     <button class="btn btn-primary follow-btn">Follow</button>
-            </a>
+                </a>
+                <a href="{% url 'interaction:chat_view' slug=user.slug %}" class="btn btn-primary" class="without-dec">Message</a>
+            </div>
+
+
         {% elif is_following %}
+        <div class="follow-chat-container">
             <a href="{% url 'users:unfollow_user' pk=user.pk %}">
                 <button class="btn btn-primary follow-btn">Unfollow</button>   
             </a>
+        </div>
         {% else %}
-            <a href="{% url 'users:logout' %}">
+            <a href="{% url 'users:logout' %}" class="without-dec">
                 <button class="btn btn-primary">Log out</button>
             </a>
-
         {% endif %}
         <div class="follower-count-container">
             <p class="post-count">{{user.posts.count}} posts</p>

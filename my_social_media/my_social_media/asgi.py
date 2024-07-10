@@ -8,11 +8,9 @@ https://docs.djangoproject.com/en/4.2/howto/deployment/asgi/
 """
 
 import os
-
 from django.core.asgi import get_asgi_application
 from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
-from django.core.asgi import get_asgi_application
 import interaction.routing
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'my_social_media.settings')

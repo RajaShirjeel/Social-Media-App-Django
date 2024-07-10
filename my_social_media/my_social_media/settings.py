@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-&h+qq!7f-8gt^=(2bfn*1p7-rwq6_zhg6rgu+whg-j!lr+m-pr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -79,14 +79,15 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'my_social_media.wsgi.application'
-ASGI_APPLICATION = 'my_social_media.asgi.application'
 
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels.layers.InMemoryChannelLayer',
     },
 }
+
+WSGI_APPLICATION = 'my_social_media.wsgi.application'
+ASGI_APPLICATION = 'my_social_media.asgi.application'
 
 
 # Database

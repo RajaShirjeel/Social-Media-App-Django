@@ -295,6 +295,12 @@
     font-weight: bold;
 }
 
+.follow-chat-container{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
 .follower-count-container{
     display: flex;
     justify-content: center;

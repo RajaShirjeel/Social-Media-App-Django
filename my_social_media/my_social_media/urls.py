@@ -28,7 +28,9 @@ urlpatterns = [
     path('search_users/', views.search_users, name='search_users'),
     path('user/', include('users.urls', namespace='user')),
     path('post/', include('posts.urls', namespace='post')),
-    path('comment/', include('comments.urls', namespace='comment'))
+    path('comment/', include('comments.urls', namespace='comment')),
+    path('interaction/', include('interaction.urls', namespace='interaction')),
+
 ]
 
 if settings.DEBUG:
