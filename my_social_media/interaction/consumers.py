@@ -1,5 +1,4 @@
 import json
-from channels.layers import get_channel_layer
 from channels.generic.websocket import AsyncWebsocketConsumer
 
 class ChatConsumer(AsyncWebsocketConsumer):
@@ -10,7 +9,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         else:
             self.room_name = self.scope['url_route']['kwargs']['room_name']
             self.room_group_name = f'chat_{self.room_name}'
-            self.channel_layer = get_channel_layer()
 
             await self.channel_layer.group_add(
                 self.room_group_name,
@@ -28,16 +26,26 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         data = json.loads(text_data)
         message = data['message']
-        receiver_channel_name =  data['receiver_channel_name']
+        receiver_channel_name = data.get('receiver_channel_name')
 
-        await self.channel_layer.send(
-            receiver_channel_name,
-            {
-                'type': 'chat.message',
-                'message': message,
-                'sender_channel_name': self.channel_name,
-            }
-        )
+        if receiver_channel_name:
+            await self.channel_layer.send(
+                receiver_channel_name,
+                {
+                    'type': 'chat_message',
+                    'message': message,
+                    'sender_channel_name': self.channel_name,
+                }
+            )
+        else:
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'chat_message',
+                    'message': message,
+                    'sender_channel_name': self.channel_name,
+                }
+            )
 
     async def chat_message(self, event):
         message = event['message']
@@ -47,4 +55,3 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'message': message,
             'sender_channel_name': sender_channel_name
         }))
-        

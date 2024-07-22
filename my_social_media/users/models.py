@@ -12,6 +12,7 @@ class CustomUser(AbstractUser):
     bio = models.TextField()
     profile_picture = models.ImageField(upload_to='images/profile_pics', blank=True)
     slug = models.SlugField(unique=True, blank=True)
+    channel_name = models.CharField(max_length=255, blank=True, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
@@ -37,6 +38,11 @@ class CustomUser(AbstractUser):
                     break
         else:  
             super().save(*args, **kwargs)
+
+
+        if not self.channel_name:
+            self.channel_name = f"user_{self.pk}"
+            super().save(update_fields=['channel_name'])
 
 
 

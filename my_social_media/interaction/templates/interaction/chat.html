@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>{{other_user.username}}</h1>
+    <h1>{{ other_user.username }}</h1>
     <div class="chat-container">
         {% for message in messages %}
             <div class="message">
                 {% if message.sender == request.user %}
-                    <p>Me: {{message.content}}</p>
+                    <p>Me: {{ message.content }}</p>
                 {% else %}
-                    {{other_user.username}}: {{message.content}}
+                    <p>{{ other_user.username }}: {{ message.content }}</p>
                 {% endif %}
             </div>
         {% endfor %}
@@ -20,45 +20,52 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-        const chatForm = document.getElementById('chat-form');
-        const messageInput = document.getElementById('chat-message-input');
-        const roomName = '{{ other_user.slug }}';
+            const chatForm = document.getElementById('chat-form');
+            const messageInput = document.getElementById('chat-message-input');
+            const roomName = '{{ other_user.slug }}';
 
-        const wsUrl = 'ws://' + window.location.host + '/ws/chat/' + roomName + '/';
-        console.log('WebSocket URL:', wsUrl); // Log WebSocket URL
+            const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsUrl = wsProtocol + '//' + window.location.host + '/ws/chat/' + roomName + '/';
+            console.log('WebSocket URL:', wsUrl);
 
-        const chatSocket = new WebSocket(wsUrl);
+            const chatSocket = new WebSocket(wsUrl);
 
-        chatSocket.onmessage = function(e) {
-            const data = JSON.parse(e.data);
-            const message = data['message'];
-            const senderChannelName = data['sender_channel_name'];
+            chatSocket.onmessage = function(e) {
+                const data = JSON.parse(e.data);
+                const message = data['message'];
+                const senderChannelName = data['sender_channel_name'];
 
-            const chatContainer = document.querySelector('.chat-container');
-            const messageElement = document.createElement('div');
-            messageElement.innerText = message;
-            chatContainer.appendChild(messageElement);
-        };
+                const chatContainer = document.querySelector('.chat-container');
+                const messageElement = document.createElement('div');
+                if (senderChannelName === '{{ user.channel_name }}') {
+                    messageElement.innerText = 'Me: ' + message;
+                } else {
+                    messageElement.innerText = '{{ other_user.username }}: ' + message;
+                }
+                chatContainer.appendChild(messageElement);
+            };
 
-        chatForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const message = messageInput.value;
-            chatSocket.send(JSON.stringify({
-                'message': message,
-                'receiver_channel_name': '{{ other_user.channel_name }}'
-            }));
-            messageInput.value = '';
+            chatSocket.onopen = function(e) {
+                console.log('WebSocket connection established.');
+            };
+
+            chatForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const message = messageInput.value;
+                chatSocket.send(JSON.stringify({
+                    'message': message,
+                    'receiver_channel_name': '{{ other_user.channel_name }}'
+                }));
+                messageInput.value = '';
+            });
+
+            chatSocket.onclose = function(e) {
+                console.error('WebSocket closed unexpectedly:', e);
+            };
+
+            chatSocket.onerror = function(e) {
+                console.error('WebSocket error observed:', e);
+            };
         });
-
-        chatSocket.onclose = function(e) {
-            console.error('WebSocket closed unexpectedly:', e);
-        };
-
-        chatSocket.onerror = function(e) {
-            console.error('WebSocket error observed:', e);
-        };
-    });
-
-        
     </script>
 {% endblock %}
